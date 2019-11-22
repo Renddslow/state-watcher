@@ -1,6 +1,6 @@
 {
   "name": "state-watcher",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "source": "index.js",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -17,8 +17,14 @@
     "build": "microbundle",
     "prepublishOnly": "yarn build"
   },
-  "files": ["dist"],
-  "keywords": ["state", "reactive", "subscriber"],
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "state",
+    "reactive",
+    "subscriber"
+  ],
   "author": "Matt McElwee <mubatt@wyopub.com>",
   "repository": "renddslow/state-watcher"
 }
