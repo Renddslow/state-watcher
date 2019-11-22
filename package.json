@@ -14,7 +14,8 @@
   },
   "scripts": {
     "test": "tape -r esm test.js | tap-spec",
-    "build": "microbundle"
+    "build": "microbundle",
+    "prepublishOnly": "yarn build"
   },
   "files": ["dist"],
   "keywords": ["state", "reactive", "subscriber"],
