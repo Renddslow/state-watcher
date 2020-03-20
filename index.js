@@ -1,3 +1,5 @@
+const uglyClone = (o) => JSON.parse(JSON.stringify(o));
+
 export default (obj = {}) => {
   const callbacks = new Map();
 
@@ -7,9 +9,9 @@ export default (obj = {}) => {
       o[k] = v;
 
       if (callbacks.has(k)) {
-        callbacks.get(k).forEach((cb) => cb(o, v, k));
+        callbacks.get(k).forEach((cb) => cb(uglyClone(o), uglyClone(v), k));
       } else if (callbacks.has(Infinity)) {
-        callbacks.get(Infinity).forEach((cb) => cb(o, v, k));
+        callbacks.get(Infinity).forEach((cb) => cb(uglyClone(o), uglyClone(v), k));
       }
 
       return true;
