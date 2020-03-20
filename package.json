@@ -26,5 +26,8 @@
     "subscriber"
   ],
   "author": "Matt McElwee <mubatt@wyopub.com>",
-  "repository": "renddslow/state-watcher"
+  "repository": "renddslow/state-watcher",
+  "dependencies": {
+    "klona": "^1.1.1"
+  }
 }
