@@ -1,6 +1,6 @@
 {
   "name": "state-watcher",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "source": "index.js",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
