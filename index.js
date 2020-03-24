@@ -39,8 +39,8 @@ export default (obj = {}) => {
         });
       }
     },
-    has: callbacks.has,
-    keys: callbacks.keys,
+    has: (search) => callbacks.has(search),
+    keys: () => callbacks.keys(),
   };
 
   return [state, watcher];
