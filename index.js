@@ -1,4 +1,4 @@
-const klona = require('klona');
+import klona from 'klona';
 
 export default (obj = {}) => {
   const callbacks = new Map();
