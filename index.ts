@@ -1,16 +1,26 @@
 import klona from 'klona';
 
-export default (obj = {}) => {
+type State = Record<string, any>;
+type Callback = (state: State, value: any, key: string) => void;
+type Watcher = {
+  on: (type: string, fields: string[], cb: Callback) => void;
+  has: (search: string) => boolean;
+  keys: () => string[];
+}
+
+export default (obj: State = {}): [State, Watcher] => {
   const callbacks = new Map();
 
   const state = new Proxy(obj, {
-    get: (o, k) => o[k],
-    set: (o, k, v) => {
+    get: (o: State, k: string) => o[k],
+    set: (o: State, k: string, v: any) => {
       o[k] = v;
 
       if (callbacks.has(k)) {
         callbacks.get(k).forEach((cb) => cb(klona(o), klona(v), k));
-      } else if (callbacks.has(Infinity)) {
+      }
+
+      if (callbacks.has(Infinity)) {
         callbacks.get(Infinity).forEach((cb) => cb(klona(o), klona(v), k));
       }
 
@@ -19,7 +29,7 @@ export default (obj = {}) => {
   });
 
   const watcher = {
-    on: (type, fields, cb) => {
+    on: (type: 'change', fields: string[], cb: Callback) => {
       if (type !== 'change') {
         throw new Error(`Event of type "${type}" is not currently supported.`);
       }
@@ -39,8 +49,8 @@ export default (obj = {}) => {
         });
       }
     },
-    has: (search) => callbacks.has(search),
-    keys: () => callbacks.keys(),
+    has: (search: string): boolean => callbacks.has(search),
+    keys: (): string[] => Array.prototype.slice.call(callbacks.keys()),
   };
 
   return [state, watcher];
