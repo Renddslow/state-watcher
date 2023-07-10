@@ -20,6 +20,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.8.0] - 2023-07-09
+
+### Added
+
+- `watcher.on` callbacks now pass the previous value as the fourth argument.
+
+---
+
 ## [0.7.1] - 2023-07-09
 
 ### Fixed

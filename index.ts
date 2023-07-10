@@ -1,9 +1,10 @@
 import klona from 'klona';
 
 type State = Record<string, any>;
-type Callback = (state: State, value: any, key: string) => void;
+type Callback = (state: State, value: any, key: string, prev: unknown) => void;
+type On = ((type: string, fields: string[], cb: Callback) => void) | ((type: string, cb: Callback) => void);
 type Watcher = {
-  on: (type: string, fields: string[], cb: Callback) => void;
+  on: On;
   has: (search: string) => boolean;
   keys: () => string[];
 }
@@ -14,17 +15,15 @@ export default (obj: State = {}): [State, Watcher] => {
   const state = new Proxy(obj, {
     get: (o: State, k: string) => o[k],
     set: (o: State, k: string, v: any) => {
-      if (o[k] === v) {
-        return true;
-      }
+      const prev = o[k];
       o[k] = v;
 
       if (callbacks.has(k)) {
-        callbacks.get(k).forEach((cb) => cb(klona(o), klona(v), k));
+        callbacks.get(k).forEach((cb) => cb(klona(o), klona(v), k, prev));
       }
 
       if (callbacks.has(Infinity)) {
-        callbacks.get(Infinity).forEach((cb) => cb(klona(o), klona(v), k));
+        callbacks.get(Infinity).forEach((cb) => cb(klona(o), klona(v), k, prev));
       }
 
       return true;
