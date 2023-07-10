@@ -20,6 +20,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.7.0] - 2023-07-09
+
+### Changed
+
+- state-watcher now natively supports es-modules
+
+### Fixed
+
+- `on` callbacks should only fire when the value changes, not when the value is set to the same value.
+
+---
+
 ## [0.6.0] - 2021-03-26
 
 ### Added
