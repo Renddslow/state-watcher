@@ -14,6 +14,9 @@ export default (obj: State = {}): [State, Watcher] => {
   const state = new Proxy(obj, {
     get: (o: State, k: string) => o[k],
     set: (o: State, k: string, v: any) => {
+      if (o[k] === v) {
+        return true;
+      }
       o[k] = v;
 
       if (callbacks.has(k)) {

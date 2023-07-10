@@ -1,6 +1,6 @@
-import test from 'tape'
+const test = require('tape');
 
-import createState from './index';
+const createState = require('./dist/index.cjs');
 
 test('Can create a valid instance', (t) => {
   const [state, watcher] = createState({ title: '' });
