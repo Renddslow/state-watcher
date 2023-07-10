@@ -6,7 +6,7 @@
   "module": "dist/index.mjs",
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
-  "exports": "dist/index.modern.js",
+  "exports": "./dist/index.modern.js",
   "license": "SEE LICENSE IN LICENSE.md",
   "type": "module",
   "devDependencies": {
